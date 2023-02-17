@@ -1,4 +1,4 @@
-package ui;
+package ui.lab1502.task2;
 
 import ru.nsu.egorov.lab1502.task2.Space;
 

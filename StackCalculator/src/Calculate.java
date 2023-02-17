@@ -5,12 +5,12 @@ import static java.lang.Math.sqrt;
 
 public class Calculate {
 
-    private static Stack<Double> stack;
+    private Stack<Double> stack;
 
     private Map<String, Double> map;
 
     public void setStack(Stack<Double> stack) {
-        Calculate.stack = stack;
+        this.stack = stack;
     }
 
     public Map<String, Double> getMap() {
