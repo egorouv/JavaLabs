@@ -13,12 +13,12 @@ public class Calculate {
         this.stack = stack;
     }
 
-    public Map<String, Double> getMap() {
-        return map;
-    }
-
     public void setMap(Map<String, Double> map) {
         this.map = map;
+    }
+
+    public Map<String, Double> getMap() {
+        return map;
     }
 
     public void popNum() {
@@ -32,25 +32,25 @@ public class Calculate {
     public void addNum() {
         double num1 = stack.pop();
         double num2 = stack.pop();
-        stack.push(num1 + num2);
+        stack.push(num2 + num1);
     }
 
     public void subNum() {
         double num1 = stack.pop();
         double num2 = stack.pop();
-        stack.push(num1 - num2);
+        stack.push(num2 - num1);
     }
 
     public void mulNum() {
         double num1 = stack.pop();
         double num2 = stack.pop();
-        stack.push(num1 * num2);
+        stack.push(num2 * num1);
     }
 
     public void divNum() {
         double num1 = stack.pop();
         double num2 = stack.pop();
-        stack.push(num1 / num2);
+        stack.push(num2 / num1);
     }
 
     public void sqrtNum() {

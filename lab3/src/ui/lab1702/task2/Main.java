@@ -21,11 +21,9 @@ public class Main {
         }
 
         String[] subStr = s.split(" ");
-        int columns = Integer.parseInt(subStr[0]);
-        int lines = Integer.parseInt(subStr[1]);
 
-        hl.setColumns(columns);
-        hl.setLines(lines);
+        hl.setColumns(Integer.parseInt(subStr[0]));
+        hl.setLines(Integer.parseInt(subStr[1]));
         hl.generateCSV();
 
     }
