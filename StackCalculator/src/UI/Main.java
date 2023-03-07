@@ -1,3 +1,9 @@
+package UI;
+
+import Handler.Operation;
+import Handler.OperationFactory;
+import Handler.StackStorage;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,18 +13,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Calculate st = new Calculate();
+        OperationFactory factory = new OperationFactory();
+        StackStorage stackStorage = new StackStorage();
         Stack<Double> stack = new Stack<>();
         Map<String, Double> map = new HashMap<>();
-        st.setStack(stack);
-        st.setMap(map);
-        Handler handler = new Handler();
+        stackStorage.setStack(stack);
+        stackStorage.setMap(map);
 
         if (args.length == 0) {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
                 String str;
-                while((str = br.readLine()) != null){
-                    handler.checkInput(str, st);
+                while((str = br.readLine()) != null) {
+                    stackStorage.setInput(str);
+                    String[] subStr = str.split(" ");
+                    Operation operation = factory.createOperation(subStr[0]);
+                    operation.getResult(stackStorage);
                 }
             }
             catch (IOException ex){
@@ -36,7 +45,10 @@ public class Main {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(file))) {
                 String str;
                 while((str = br.readLine()) != null){
-                    handler.checkInput(str, st);
+                    stackStorage.setInput(str);
+                    String[] subStr = str.split(" ");
+                    Operation operation = factory.createOperation(subStr[0]);
+                    operation.getResult(stackStorage);
                 }
             }
             catch (IOException ex){
@@ -45,5 +57,5 @@ public class Main {
         }
 
     }
-    
+
 }
