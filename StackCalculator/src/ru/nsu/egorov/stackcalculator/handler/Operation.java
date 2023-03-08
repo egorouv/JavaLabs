@@ -1,4 +1,4 @@
-package Handler;
+package ru.nsu.egorov.stackcalculator.handler;
 
 public interface Operation {
 

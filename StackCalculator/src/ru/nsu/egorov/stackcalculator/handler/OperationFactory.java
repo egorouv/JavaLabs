@@ -1,4 +1,4 @@
-package Handler;
+package ru.nsu.egorov.stackcalculator.handler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +18,8 @@ public class OperationFactory {
                 Properties properties = new Properties();
                 properties.load(reader);
                 for (String operationName : properties.stringPropertyNames()) {
-                    String className = properties.getProperty(operationName);
-                    operationsMap.put(operationName, className);
+                    String className = properties.getProperty(operationName.toUpperCase());
+                    operationsMap.put(operationName.toUpperCase(), className);
                 }
             }
         } catch (IOException e) {
@@ -29,9 +29,10 @@ public class OperationFactory {
 
     public Operation createOperation(String operationName) {
         try {
-            String className = operationsMap.get(operationName);
+            String className = operationsMap.get(operationName.toUpperCase());
             Class<?> clazz = Class.forName(className);
             return (Operation) clazz.getConstructor().newInstance();
+
         } catch (Exception e) {
             throw new RuntimeException("Failed to create operation: " + operationName, e);
         }

@@ -1,7 +1,7 @@
-package Operations;
+package ru.nsu.egorov.stackcalculator.operations;
 
-import Handler.Operation;
-import Handler.StackStorage;
+import ru.nsu.egorov.stackcalculator.handler.Operation;
+import ru.nsu.egorov.stackcalculator.handler.StackStorage;
 
 import java.util.Stack;
 

@@ -1,4 +1,4 @@
-package Handler;
+package ru.nsu.egorov.stackcalculator.handler;
 
 import java.util.Map;
 import java.util.Stack;
