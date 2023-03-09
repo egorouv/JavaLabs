@@ -11,6 +11,7 @@ public class DefineOperation implements Operation {
     public void getResult(StackStorage stackStorage) {
         Map<String, Double> map = stackStorage.getMap();
         String[] subStr = stackStorage.getInput().split(" ");
+        if (stackStorage.isNumeric(subStr[1])) return;
         map.put(subStr[1], Double.parseDouble(subStr[2]));
         stackStorage.setMap(map);
     }

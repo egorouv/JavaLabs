@@ -42,6 +42,8 @@ public class Main {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
                 String str;
                 while ((str = br.readLine()) != null) {
+                    char[] strToArray = str.toCharArray();
+                    if (strToArray[0] == '#') continue;
                     if (str.equalsIgnoreCase("EXIT")) System.exit(0);
                     stackStorage.setInput(str);
                     String[] subStr = str.split(" ");
@@ -64,6 +66,8 @@ public class Main {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(file))) {
                 String str;
                 while ((str = br.readLine()) != null) {
+                    char[] strToArray = str.toCharArray();
+                    if (strToArray[0] == '#') continue;
                     stackStorage.setInput(str);
                     String[] subStr = str.split(" ");
                     Operation operation = factory.createOperation(subStr[0]);
