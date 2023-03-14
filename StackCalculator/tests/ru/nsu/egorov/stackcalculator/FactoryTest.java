@@ -1,4 +1,4 @@
-package ru.nsu.egorov.stackcalculator.tests;
+package ru.nsu.egorov.stackcalculator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
