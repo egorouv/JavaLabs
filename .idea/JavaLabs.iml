@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/lab5/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StackCalculator/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/lab1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab6/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/StackCalculator/out" />
       <excludeFolder url="file://$MODULE_DIR$/lab3/out" />
     </content>

@@ -5,10 +5,20 @@ import ru.nsu.egorov.stackcalculator.handler.OperationFactory;
 import ru.nsu.egorov.stackcalculator.handler.StackStorage;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
 public class InputReader {
 
-    public void inputReader(String args, StackStorage stackStorage, OperationFactory factory) throws IOException {
+    public void inputReader(String args) throws IOException {
+
+        OperationFactory factory = new OperationFactory();
+        StackStorage stackStorage = new StackStorage();
+        Stack<Double> stack = new Stack<>();
+        Map<String, Double> map = new HashMap<>();
+        stackStorage.setStack(stack);
+        stackStorage.setMap(map);
 
         BufferedReader br;
         if (args.equals("Stream")) {
