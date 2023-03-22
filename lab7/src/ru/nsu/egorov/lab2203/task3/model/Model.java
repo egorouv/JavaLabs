@@ -23,8 +23,7 @@ public class Model {
     }
 
     public void checkAnswer() {
-        if (answer == -1) notifyGameEnded();
-        else if (answer == -999) notifyTimeout();
+        if (answer == -999) notifyTimeout();
         else if (number == answer) notifyCorrectAnswer();
         else notifyIncorrectAnswer();
     }
@@ -52,10 +51,6 @@ public class Model {
 
     private void notifyIncorrectAnswer() {
         for (ModelListener modelListener : modelListeners) modelListener.onIncorrectAnswer();
-    }
-
-    private void notifyGameEnded() {
-        for (ModelListener modelListener : modelListeners) modelListener.onGameEnded();
     }
 
 }
