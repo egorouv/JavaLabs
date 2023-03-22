@@ -1,8 +1,6 @@
 package ru.nsu.egorov.stackcalculator.ui;
 
-import ru.nsu.egorov.stackcalculator.handler.Operation;
-import ru.nsu.egorov.stackcalculator.handler.OperationFactory;
-import ru.nsu.egorov.stackcalculator.handler.StackStorage;
+import ru.nsu.egorov.stackcalculator.handler.*;
 
 import java.io.*;
 import java.util.HashMap;
@@ -13,7 +11,7 @@ public class InputReader {
 
     public void inputReader(String args) throws IOException {
 
-        OperationFactory factory = new OperationFactory();
+        Factory factory = new OperationFactoryFilled(new OperationFactory());
         StackStorage stackStorage = new StackStorage();
         Stack<Double> stack = new Stack<>();
         Map<String, Double> map = new HashMap<>();

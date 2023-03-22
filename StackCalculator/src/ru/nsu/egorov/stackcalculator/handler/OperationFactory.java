@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class OperationFactory {
+public class OperationFactory implements Factory {
 
     private final Map<String, String> operationsMap = new HashMap<>();
 
@@ -27,12 +27,12 @@ public class OperationFactory {
         }
     }
 
+    @Override
     public Operation createOperation(String operationName) {
         try {
             String className = operationsMap.get(operationName.toUpperCase());
             Class<?> clazz = Class.forName(className);
             return (Operation) clazz.getConstructor().newInstance();
-
         } catch (Exception e) {
             throw new RuntimeException("Failed to create operation: " + operationName, e);
         }
