@@ -10,7 +10,7 @@ public class SwingView extends JFrame implements ModelListener {
 
     private final Model model;
 
-    public JTextField textField;
+    private JTextField textField;
     private JButton button;
     private JLabel number;
     private JLabel output;
