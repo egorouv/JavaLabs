@@ -76,10 +76,4 @@ public class SwingView extends JFrame implements ModelListener {
         output.setText("Time is up!");
     }
 
-    @Override
-    public void onGameEnded() {
-        output.setText("Finishing the game!");
-        System.exit(0);
-    }
-
 }

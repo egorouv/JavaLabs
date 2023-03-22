@@ -6,6 +6,5 @@ public interface ModelListener {
     void onCorrectAnswer();
     void onIncorrectAnswer();
     void onTimeout();
-    void onGameEnded();
 
 }
