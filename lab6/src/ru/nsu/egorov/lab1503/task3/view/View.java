@@ -19,11 +19,6 @@ public class View implements Listener {
     }
 
     @Override
-    public void onGetAnswer() {
-        model.checkAnswer();
-    }
-
-    @Override
     public void onCorrectAnswer() {
         System.out.println("Correct!\n");
     }

@@ -31,7 +31,7 @@ public class Model {
 
     public void setAnswer(int answer) {
         this.answer = answer;
-        notifyGetAnswer();
+        checkAnswer();
     }
 
     public void addListener(Listener listener) {
@@ -40,10 +40,6 @@ public class Model {
 
     private void notifyGenerateNumber() {
         for (Listener listener : listeners) listener.onGenerateNumber();
-    }
-
-    private void notifyGetAnswer() {
-        for (Listener listener : listeners) listener.onGetAnswer();
     }
 
     private void notifyTimeout() {
