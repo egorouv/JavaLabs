@@ -5,6 +5,5 @@ public interface ModelListener {
     void onGenerateNumber();
     void onCorrectAnswer();
     void onIncorrectAnswer();
-    void onTimeout();
 
 }

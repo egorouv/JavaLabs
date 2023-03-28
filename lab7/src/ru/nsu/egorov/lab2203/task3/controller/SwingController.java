@@ -22,6 +22,7 @@ public class SwingController {
             } catch (NumberFormatException ex) {
                 model.setAnswer(-99);
             }
+            model.generateNumber();
         });
 
     }

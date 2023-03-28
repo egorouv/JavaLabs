@@ -64,16 +64,13 @@ public class SwingView extends JFrame implements ModelListener {
     @Override
     public void onCorrectAnswer() {
         output.setText("Correct!");
+        textField.setText("");
     }
 
     @Override
     public void onIncorrectAnswer() {
         output.setText("Incorrect!");
-    }
-
-    @Override
-    public void onTimeout() {
-        output.setText("Time is up!");
+        textField.setText("");
     }
 
 }

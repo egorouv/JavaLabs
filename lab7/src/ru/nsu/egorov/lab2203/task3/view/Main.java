@@ -10,10 +10,8 @@ public class Main {
         SwingView swingView = new SwingView(model);
         SwingController swingController = new SwingController(model, swingView);
 
-        //while (true) {
-            model.generateNumber();
-            swingController.inputAnswer();
-        //}
+        model.generateNumber();
+        swingController.inputAnswer();
 
     }
 }

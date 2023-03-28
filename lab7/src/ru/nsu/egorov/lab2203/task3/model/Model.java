@@ -23,8 +23,7 @@ public class Model {
     }
 
     public void checkAnswer() {
-        if (answer == -999) notifyTimeout();
-        else if (number == answer) notifyCorrectAnswer();
+        if (number == answer) notifyCorrectAnswer();
         else notifyIncorrectAnswer();
     }
 
@@ -39,10 +38,6 @@ public class Model {
 
     private void notifyGenerateNumber() {
         for (ModelListener modelListener : modelListeners) modelListener.onGenerateNumber();
-    }
-
-    private void notifyTimeout() {
-        for (ModelListener modelListener : modelListeners) modelListener.onTimeout();
     }
 
     private void notifyCorrectAnswer() {
