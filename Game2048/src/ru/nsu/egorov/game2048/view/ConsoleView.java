@@ -15,21 +15,25 @@ public class ConsoleView {
 
     public void printField() {
         int[][] a = field.getField();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < field.getSize(); i++) {
+            for (int j = 0; j < field.getSize(); j++) {
                 System.out.print(a[i][j] + " ");
             }
             System.out.println();
         }
-        while (true) {
+        System.out.println("Score: " + field.getScore());
+        System.out.println("High Score: " + field.getHighScore());
+        while (field.isFlag()) {
             field.moveCells(directionHandler.getInput());
             a = field.getField();
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
+            for (int i = 0; i < field.getSize(); i++) {
+                for (int j = 0; j < field.getSize(); j++) {
                     System.out.print(a[i][j] + " ");
                 }
                 System.out.println();
             }
+            System.out.println("Score: " + field.getScore());
+            System.out.println("High Score: " + field.getHighScore());
         }
     }
 
