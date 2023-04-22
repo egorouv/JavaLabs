@@ -27,11 +27,11 @@ public class Main {
             fileWriter.write(objectMapper.writeValueAsString(dataStructure));
             fileWriter.close();
 
-            String json = new String(Files.readAllBytes(Paths.get("data.json")));
+            /*String json = new String(Files.readAllBytes(Paths.get("data.json")));
             DataStructure dataFromFile = objectMapper.readValue(json, DataStructure.class);
 
             System.out.println("Name: " + dataFromFile.getName());
-            System.out.println("Age: " + dataFromFile.getAge());
+            System.out.println("Age: " + dataFromFile.getAge());*/
         } catch (IOException e) {
             e.printStackTrace();
         }
