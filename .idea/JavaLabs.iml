@@ -14,8 +14,16 @@
       <sourceFolder url="file://$MODULE_DIR$/lab8/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Game2048/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab9/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab10/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab10/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/lab10/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/lab11/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab11/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/lab11/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/StackCalculator/out" />
       <excludeFolder url="file://$MODULE_DIR$/lab3/out" />
+      <excludeFolder url="file://$MODULE_DIR$/lab10/target" />
+      <excludeFolder url="file://$MODULE_DIR$/lab11/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -52,5 +60,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.14.2" level="project" />
   </component>
 </module>

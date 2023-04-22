@@ -1,6 +1,8 @@
 package ru.nsu.egorov.game2048.model;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -32,7 +34,18 @@ public class Field {
         return size;
     }
 
-    public void changeHighScore() {
+    public void highScoreFromFile() {
+        Path path = Paths.get("D:\\source\\JavaLabs\\Game2048\\src\\ru\\nsu\\egorov\\game2048\\model\\HighScore");
+        try (FileReader fileReader = new FileReader(path.toFile())) {
+            Scanner scanner = new Scanner(fileReader);
+            highScore = Integer.parseInt(String.valueOf(scanner.nextInt()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setHighScore(int score) {
+        highScore = score;
         try (FileWriter writer = new FileWriter("D:\\source\\JavaLabs\\Game2048\\src\\ru\\nsu\\egorov\\game2048\\model\\HighScore", false)) {
             String highScore = String.valueOf(score);
             writer.write(highScore);
@@ -42,12 +55,7 @@ public class Field {
     }
 
     public int getHighScore() {
-        try (FileReader fileReader = new FileReader("D:\\source\\JavaLabs\\Game2048\\src\\ru\\nsu\\egorov\\game2048\\model\\HighScore")) {
-            Scanner scanner = new Scanner(fileReader);
-            return Integer.parseInt(String.valueOf(scanner.nextInt()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return highScore;
     }
 
     public void initializeField() {
@@ -65,6 +73,7 @@ public class Field {
         field[secondX][secondY] = 2;
         flag = true;
         score = 0;
+        highScoreFromFile();
     }
 
     public void moveCells(String direction) {
@@ -83,7 +92,7 @@ public class Field {
                                     field[tmp - 1][j] += field[tmp][j];
                                     field[tmp][j] = 0;
                                     score += field[tmp - 1][j];
-                                    changeHighScore();
+                                    setHighScore(score);
                                     if (getState(field, tmp - 1, j) == 2048) flag = false;
                                 }
                                 tmp--;
@@ -106,7 +115,7 @@ public class Field {
                                     field[tmp + 1][j] += field[tmp][j];
                                     field[tmp][j] = 0;
                                     score += field[tmp + 1][j];
-                                    changeHighScore();
+                                    setHighScore(score);
                                     if (getState(field, tmp + 1, j) == 2048) flag = false;
                                 }
                                 tmp++;
@@ -129,7 +138,7 @@ public class Field {
                                     field[i][tmp - 1] += field[i][tmp];
                                     field[i][tmp] = 0;
                                     score += field[i][tmp - 1];
-                                    changeHighScore();
+                                    setHighScore(score);
                                     if (getState(field, i, tmp - 1) == 2048) flag = false;
                                 }
                                 tmp--;
@@ -152,7 +161,7 @@ public class Field {
                                     field[i][tmp + 1] += field[i][tmp];
                                     field[i][tmp] = 0;
                                     score += field[i][tmp + 1];
-                                    changeHighScore();
+                                    setHighScore(score);
                                     if (getState(field, i, tmp + 1) == 2048) flag = false;
                                 }
                                 tmp++;
