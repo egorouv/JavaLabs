@@ -20,11 +20,11 @@ public class Main {
         DataStructure dataStructure = new DataStructure();
         dataStructure.setName(name);
         dataStructure.setAge(age);
-        ObjectMapper objectMapper = new ObjectMapper();
+        //ObjectMapper objectMapper = new ObjectMapper();
 
         try {
             FileWriter fileWriter = new FileWriter("data.json");
-            fileWriter.write(objectMapper.writeValueAsString(dataStructure));
+            //fileWriter.write(objectMapper.writeValueAsString(dataStructure));
             fileWriter.close();
 
             /*String json = new String(Files.readAllBytes(Paths.get("data.json")));
@@ -39,4 +39,4 @@ public class Main {
     }
 }
 
-//mvn exec:java -Dexec.mainClass="ru.nsu.egorov.lab1204.task2.Main"
+//mvn exec:java -Dexec.mainClass="ru.nsu.egorov.lab1204.task2.ru.nsu.egorov.lab2604.task1.Main"
