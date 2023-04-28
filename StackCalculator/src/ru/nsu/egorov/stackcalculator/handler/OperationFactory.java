@@ -1,11 +1,11 @@
 package ru.nsu.egorov.stackcalculator.handler;
 
+import ru.nsu.egorov.stackcalculator.operations.CompositeOperation;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class OperationFactory implements Factory {
 
@@ -37,5 +37,16 @@ public class OperationFactory implements Factory {
             throw new RuntimeException("Failed to create operation: " + operationName, e);
         }
     }
+
+    public Operation createCompositeOperation(String[] operationNames) {
+        List<Operation> operations = new ArrayList<>();
+        for (String operationName : operationNames) {
+            Operation operation = createOperation(operationName);
+            operations.add(operation);
+        }
+        return new CompositeOperation(operations);
+    }
+
+
 
 }

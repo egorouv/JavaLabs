@@ -11,7 +11,8 @@ public class InputReader {
 
     public void inputReader(String args) throws IOException {
 
-        Factory factory = new OperationFactoryFilled(new OperationFactory());
+        //Factory factory = new OperationFactoryFilled(new OperationFactory());
+        OperationFactory factory = new OperationFactory();
         StackStorage stackStorage = new StackStorage();
         Stack<Double> stack = new Stack<>();
         Map<String, Double> map = new HashMap<>();
@@ -59,7 +60,13 @@ public class InputReader {
             if (strToArray[0] == '#') continue;
             stackStorage.setInput(str);
             String[] subStr = str.split(" ");
-            Operation operation = factory.createOperation(subStr[0]);
+            Operation operation;
+            if (subStr[0].equalsIgnoreCase("COMPOSITE")) {
+                String[] compositeStr = new String[subStr.length - 1];
+                System.arraycopy(subStr, 1, compositeStr, 0, subStr.length - 1);
+                operation = factory.createCompositeOperation(compositeStr);
+            }
+            else operation = factory.createOperation(subStr[0]);
             operation.getResult(stackStorage);
         }
 
