@@ -3,7 +3,9 @@ package ru.nsu.egorov.game2048.model;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Field {
@@ -13,12 +15,25 @@ public class Field {
     private boolean flag;
     private int score;
     private int highScore;
+    private final List<FieldListener> fieldListeners;
+
+    public Field() {
+        fieldListeners = new ArrayList<>();
+    }
+
+    public void addListener(FieldListener fieldListener) {
+        fieldListeners.add(fieldListener);
+    }
+
+    private void notifyMovingCells() throws IOException {
+        for (FieldListener fieldListener : fieldListeners) fieldListener.onMovingCells();
+    }
 
     public int[][] getField() {
         return field;
     }
 
-    public int getState(int[][] field, int x, int y) {
+    public int getState(int x, int y) {
         return field[x][y];
     }
 
@@ -49,7 +64,7 @@ public class Field {
         try (FileWriter writer = new FileWriter("D:\\source\\JavaLabs\\Game2048\\src\\ru\\nsu\\egorov\\game2048\\model\\HighScore", false)) {
             String highScore = String.valueOf(score);
             writer.write(highScore);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -76,7 +91,19 @@ public class Field {
         highScoreFromFile();
     }
 
-    public void moveCells(String direction) {
+    public boolean checkMovement() {
+        int movement = 0;
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - 1; j++) {
+                if (getState(i, j) == 0 || getState(i + 1, j) == 0 || getState(i, j + 1) == 0) movement++;
+                if (getState(i, j) == getState(i + 1, j) || getState(i, j) == getState(i, j + 1)) movement++;
+            }
+        }
+        return movement > 0;
+    }
+
+    public void moveCells(String direction) throws IOException {
+
         switch (direction.toUpperCase()) {
 
             case "UP" -> {
@@ -93,13 +120,14 @@ public class Field {
                                     field[tmp][j] = 0;
                                     score += field[tmp - 1][j];
                                     setHighScore(score);
-                                    if (getState(field, tmp - 1, j) == 2048) flag = false;
+                                    if (getState(tmp - 1, j) == 2048) flag = false;
                                 }
                                 tmp--;
                             }
                         }
                     }
                 }
+                notifyMovingCells();
             }
 
             case "DOWN" -> {
@@ -116,13 +144,14 @@ public class Field {
                                     field[tmp][j] = 0;
                                     score += field[tmp + 1][j];
                                     setHighScore(score);
-                                    if (getState(field, tmp + 1, j) == 2048) flag = false;
+                                    if (getState(tmp + 1, j) == 2048) flag = false;
                                 }
                                 tmp++;
                             }
                         }
                     }
                 }
+                notifyMovingCells();
             }
 
             case "LEFT" -> {
@@ -139,13 +168,14 @@ public class Field {
                                     field[i][tmp] = 0;
                                     score += field[i][tmp - 1];
                                     setHighScore(score);
-                                    if (getState(field, i, tmp - 1) == 2048) flag = false;
+                                    if (getState(i, tmp - 1) == 2048) flag = false;
                                 }
                                 tmp--;
                             }
                         }
                     }
                 }
+                notifyMovingCells();
             }
 
             case "RIGHT" -> {
@@ -162,27 +192,30 @@ public class Field {
                                     field[i][tmp] = 0;
                                     score += field[i][tmp + 1];
                                     setHighScore(score);
-                                    if (getState(field, i, tmp + 1) == 2048) flag = false;
+                                    if (getState(i, tmp + 1) == 2048) flag = false;
                                 }
                                 tmp++;
                             }
                         }
                     }
                 }
+                notifyMovingCells();
             }
 
-            default -> {
+            case "EXIT" -> System.exit(0);
 
-            }
+            default -> System.out.println("Enter direction or exit");
 
         }
+
         int newX = (int) (Math.random() * size);
         int newY = (int) (Math.random() * size);
-        while (getState(field, newX, newY) != 0) {
+        while (getState(newX, newY) != 0) {
             newX = (int) (Math.random() * size);
             newY = (int) (Math.random() * size);
         }
         field[newX][newY] = 2;
+
     }
 
 }

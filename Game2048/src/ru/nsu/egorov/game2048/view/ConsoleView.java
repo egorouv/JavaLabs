@@ -1,40 +1,32 @@
 package ru.nsu.egorov.game2048.view;
 
-import ru.nsu.egorov.game2048.controller.DirectionHandler;
 import ru.nsu.egorov.game2048.model.Field;
+import ru.nsu.egorov.game2048.model.FieldListener;
 
-public class ConsoleView {
+public class ConsoleView implements FieldListener {
 
     private final Field field;
-    private final DirectionHandler directionHandler;
 
-    public ConsoleView(Field field, DirectionHandler directionHandler) {
+    public ConsoleView(Field field) {
         this.field = field;
-        this.directionHandler = directionHandler;
+        field.addListener(this);
     }
 
     public void printField() {
-        int[][] a = field.getField();
+        int[][] matrix = field.getField();
         for (int i = 0; i < field.getSize(); i++) {
             for (int j = 0; j < field.getSize(); j++) {
-                System.out.print(a[i][j] + " ");
+                System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
         }
         System.out.println("Score: " + field.getScore());
         System.out.println("High Score: " + field.getHighScore());
-        while (field.isFlag()) {
-            field.moveCells(directionHandler.getInput());
-            a = field.getField();
-            for (int i = 0; i < field.getSize(); i++) {
-                for (int j = 0; j < field.getSize(); j++) {
-                    System.out.print(a[i][j] + " ");
-                }
-                System.out.println();
-            }
-            System.out.println("Score: " + field.getScore());
-            System.out.println("High Score: " + field.getHighScore());
-        }
+        if (!field.isFlag()) System.out.println("You won!");
     }
 
+    @Override
+    public void onMovingCells() {
+        printField();
+    }
 }
