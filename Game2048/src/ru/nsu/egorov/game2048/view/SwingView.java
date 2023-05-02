@@ -6,6 +6,7 @@ import ru.nsu.egorov.game2048.model.FieldListener;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Objects;
 import java.util.Properties;
 
 public class SwingView extends JFrame implements FieldListener {
@@ -34,7 +35,11 @@ public class SwingView extends JFrame implements FieldListener {
                 cells[i][j] = new JPanel();
                 contentPane.add(cells[i][j]);
                 Properties colors = new Properties();
-                colors.load(new FileInputStream("D:\\source\\JavaLabs\\Game2048\\src\\ru\\nsu\\egorov\\game2048\\view\\colors.properties"));
+                try (BufferedReader reader = new BufferedReader
+                        (new InputStreamReader(Objects.requireNonNull
+                                (getClass().getResourceAsStream("colors.properties"))))) {
+                    colors.load(reader);
+                }
                 cells[i][j].setBackground(Color.decode(colors.getProperty(String.valueOf(field.getState(i, j)))));
                 cells[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 JLabel label = new JLabel(String.valueOf(field.getState(i, j)));
@@ -51,7 +56,11 @@ public class SwingView extends JFrame implements FieldListener {
         for (int i = 0; i < field.getSize(); i++) {
             for (int j = 0; j < field.getSize(); j++) {
                 Properties colors = new Properties();
-                colors.load(new FileInputStream("D:\\source\\JavaLabs\\Game2048\\src\\ru\\nsu\\egorov\\game2048\\view\\colors.properties"));
+                try (BufferedReader reader = new BufferedReader
+                        (new InputStreamReader(Objects.requireNonNull
+                                (getClass().getResourceAsStream("colors.properties"))))) {
+                    colors.load(reader);
+                }
                 cells[i][j].removeAll();
                 cells[i][j].setBackground(Color.decode(colors.getProperty(String.valueOf(field.getState(i, j)))));
                 cells[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));

@@ -11,16 +11,16 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         System.out.print("""
-                (1) - Console view
-                (2) - Swing view
+                1 - Console view
+                2 - Swing view
                 Enter option number:\s""");
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
+        String option = scanner.nextLine();
 
         Field field = new Field();
         field.initializeField();
 
-        if (option == 1) {
+        if (option.equals("1")) {
             System.out.println("Enter 'exit' to finish");
             DirectionHandler directionHandler = new DirectionHandler(field);
             ConsoleView consoleView = new ConsoleView(field);
@@ -28,7 +28,7 @@ public class Main {
             while (field.isFlag() && field.checkMovement()) directionHandler.getInput();
         }
 
-        else if (option == 2) {
+        else if (option.equals("2")) {
             SwingView swingView = new SwingView(field);
             SwingDirection swingDirection = new SwingDirection(field);
             swingView.addKeyListener(swingDirection);

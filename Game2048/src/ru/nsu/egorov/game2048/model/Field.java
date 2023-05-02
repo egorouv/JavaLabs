@@ -1,12 +1,7 @@
 package ru.nsu.egorov.game2048.model;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Field {
 
@@ -50,22 +45,23 @@ public class Field {
     }
 
     public void highScoreFromFile() {
-        Path path = Paths.get("D:\\source\\JavaLabs\\Game2048\\src\\ru\\nsu\\egorov\\game2048\\model\\HighScore");
-        try (FileReader fileReader = new FileReader(path.toFile())) {
-            Scanner scanner = new Scanner(fileReader);
-            highScore = Integer.parseInt(String.valueOf(scanner.nextInt()));
+        try (BufferedReader reader = new BufferedReader
+                (new InputStreamReader(Objects.requireNonNull
+                        (getClass().getResourceAsStream("HighScore"))))) {
+            String str = reader.readLine();
+            highScore = Integer.parseInt(str);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void setHighScore(int score) {
-        highScore = score;
-        try (FileWriter writer = new FileWriter("D:\\source\\JavaLabs\\Game2048\\src\\ru\\nsu\\egorov\\game2048\\model\\HighScore", false)) {
-            String highScore = String.valueOf(score);
-            writer.write(highScore);
+        try (BufferedWriter writer = new BufferedWriter
+                (new FileWriter(Objects.requireNonNull
+                        (getClass().getResource("HighScore")).getPath()))) {
+            writer.write(Integer.toString(score));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -95,8 +91,10 @@ public class Field {
         int movement = 0;
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - 1; j++) {
-                if (getState(i, j) == 0 || getState(i + 1, j) == 0 || getState(i, j + 1) == 0) movement++;
-                if (getState(i, j) == getState(i + 1, j) || getState(i, j) == getState(i, j + 1)) movement++;
+                if (getState(i, j) == 0 || getState(i + 1, j) == 0 || getState(i, j + 1) == 0)
+                    movement++;
+                if (getState(i, j) == getState(i + 1, j) || getState(i, j) == getState(i, j + 1))
+                    movement++;
             }
         }
         return movement > 0;
@@ -119,7 +117,7 @@ public class Field {
                                     field[tmp - 1][j] += field[tmp][j];
                                     field[tmp][j] = 0;
                                     score += field[tmp - 1][j];
-                                    setHighScore(score);
+                                    if (score > highScore) setHighScore(score);
                                     if (getState(tmp - 1, j) == 2048) flag = false;
                                 }
                                 tmp--;
@@ -143,7 +141,7 @@ public class Field {
                                     field[tmp + 1][j] += field[tmp][j];
                                     field[tmp][j] = 0;
                                     score += field[tmp + 1][j];
-                                    setHighScore(score);
+                                    if (score > highScore) setHighScore(score);
                                     if (getState(tmp + 1, j) == 2048) flag = false;
                                 }
                                 tmp++;
@@ -167,7 +165,7 @@ public class Field {
                                     field[i][tmp - 1] += field[i][tmp];
                                     field[i][tmp] = 0;
                                     score += field[i][tmp - 1];
-                                    setHighScore(score);
+                                    if (score > highScore) setHighScore(score);
                                     if (getState(i, tmp - 1) == 2048) flag = false;
                                 }
                                 tmp--;
@@ -191,7 +189,7 @@ public class Field {
                                     field[i][tmp + 1] += field[i][tmp];
                                     field[i][tmp] = 0;
                                     score += field[i][tmp + 1];
-                                    setHighScore(score);
+                                    if (score > highScore) setHighScore(score);
                                     if (getState(i, tmp + 1) == 2048) flag = false;
                                 }
                                 tmp++;
@@ -204,7 +202,6 @@ public class Field {
 
             case "EXIT" -> System.exit(0);
 
-            default -> System.out.println("Enter direction or exit");
 
         }
 
