@@ -24,6 +24,14 @@ public class Field {
         for (FieldListener fieldListener : fieldListeners) fieldListener.onMovingCells();
     }
 
+    private void notifyEndingGame() {
+        for (FieldListener fieldListener : fieldListeners) fieldListener.onEndingGame();
+    }
+
+    private void notifyRestartingGame() throws IOException {
+        for (FieldListener fieldListener : fieldListeners) fieldListener.onRestartingGame();
+    }
+
     public int[][] getField() {
         return field;
     }
@@ -118,7 +126,11 @@ public class Field {
                                     field[tmp][j] = 0;
                                     score += field[tmp - 1][j];
                                     if (score > highScore) setHighScore(score);
-                                    if (getState(tmp - 1, j) == 2048) flag = false;
+                                    if (getState(tmp - 1, j) == 16) {
+                                        flag = false;
+                                        notifyEndingGame();
+                                        return;
+                                    }
                                 }
                                 tmp--;
                             }
@@ -142,7 +154,11 @@ public class Field {
                                     field[tmp][j] = 0;
                                     score += field[tmp + 1][j];
                                     if (score > highScore) setHighScore(score);
-                                    if (getState(tmp + 1, j) == 2048) flag = false;
+                                    if (getState(tmp + 1, j) == 16) {
+                                        flag = false;
+                                        notifyEndingGame();
+                                        return;
+                                    }
                                 }
                                 tmp++;
                             }
@@ -166,7 +182,11 @@ public class Field {
                                     field[i][tmp] = 0;
                                     score += field[i][tmp - 1];
                                     if (score > highScore) setHighScore(score);
-                                    if (getState(i, tmp - 1) == 2048) flag = false;
+                                    if (getState(i, tmp - 1) == 16) {
+                                        flag = false;
+                                        notifyEndingGame();
+                                        return;
+                                    }
                                 }
                                 tmp--;
                             }
@@ -190,7 +210,11 @@ public class Field {
                                     field[i][tmp] = 0;
                                     score += field[i][tmp + 1];
                                     if (score > highScore) setHighScore(score);
-                                    if (getState(i, tmp + 1) == 2048) flag = false;
+                                    if (getState(i, tmp + 1) == 16) {
+                                        flag = false;
+                                        notifyEndingGame();
+                                        return;
+                                    }
                                 }
                                 tmp++;
                             }
@@ -202,7 +226,6 @@ public class Field {
 
             case "EXIT" -> System.exit(0);
 
-
         }
 
         int newX = (int) (Math.random() * size);
@@ -213,6 +236,11 @@ public class Field {
         }
         field[newX][newY] = 2;
 
+    }
+
+    public void restartGame() throws IOException {
+        initializeField();
+        notifyRestartingGame();
     }
 
 }

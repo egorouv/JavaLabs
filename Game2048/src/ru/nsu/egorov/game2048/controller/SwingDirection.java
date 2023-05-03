@@ -2,11 +2,13 @@ package ru.nsu.egorov.game2048.controller;
 
 import ru.nsu.egorov.game2048.model.Field;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
-public class SwingDirection implements KeyListener {
+public class SwingDirection implements KeyListener, ActionListener {
 
     private final Field field;
 
@@ -51,4 +53,15 @@ public class SwingDirection implements KeyListener {
         }
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("finish")) System.exit(0);
+        else if (e.getActionCommand().equals("restart")) {
+            try {
+                field.restartGame();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
 }

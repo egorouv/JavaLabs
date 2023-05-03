@@ -29,4 +29,15 @@ public class ConsoleView implements FieldListener {
     public void onMovingCells() {
         printField();
     }
+
+    @Override
+    public void onEndingGame() {
+        System.exit(0);
+    }
+
+    @Override
+    public void onRestartingGame() {
+        field.initializeField();
+        printField();
+    }
 }

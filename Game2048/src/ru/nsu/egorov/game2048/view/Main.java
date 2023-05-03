@@ -29,8 +29,8 @@ public class Main {
         }
 
         else if (option.equals("2")) {
-            SwingView swingView = new SwingView(field);
             SwingDirection swingDirection = new SwingDirection(field);
+            SwingView swingView = new SwingView(field, swingDirection);
             swingView.addKeyListener(swingDirection);
             swingView.userInterface();
         }

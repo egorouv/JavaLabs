@@ -1,5 +1,6 @@
 package ru.nsu.egorov.game2048.view;
 
+import ru.nsu.egorov.game2048.controller.SwingDirection;
 import ru.nsu.egorov.game2048.model.Field;
 import ru.nsu.egorov.game2048.model.FieldListener;
 
@@ -12,10 +13,12 @@ import java.util.Properties;
 public class SwingView extends JFrame implements FieldListener {
 
     private final Field field;
+    private final SwingDirection swingDirection;
     private JPanel[][] cells;
 
-    public SwingView(Field field) {
+    public SwingView(Field field, SwingDirection swingDirection) {
         this.field = field;
+        this.swingDirection = swingDirection;
         field.addListener(this);
     }
 
@@ -80,8 +83,37 @@ public class SwingView extends JFrame implements FieldListener {
             setTitle("Game2048. " + "Score: " + field.getScore() + ", Highscore: " + field.getHighScore());
         }
         else {
-            setTitle("Game2048. " + "Score: " + field.getScore() + ", Highscore: " + field.getHighScore() + " Game over!");
+            setTitle("Game2048. " + "Score: " + field.getScore() + ", Highscore: " + field.getHighScore() + ". Game over!");
         }
+    }
+
+    @Override
+    public void onEndingGame() {
+
+        JButton finishGame = new JButton("Finish the game");
+        JButton restartGame = new JButton("Restart the game");
+        JFrame jFrame = new JFrame("Game over!");
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panel.add(finishGame);
+        panel.add(restartGame);
+        jFrame.add(panel);
+        jFrame.setSize(300, 80);
+        jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setVisible(true);
+
+        finishGame.setActionCommand("finish");
+        finishGame.addActionListener(swingDirection);
+        restartGame.setActionCommand("restart");
+        restartGame.addActionListener(swingDirection);
+
+    }
+
+    @Override
+    public void onRestartingGame() throws IOException {
+        JFrame jFrame = new JFrame();
+        jFrame.removeAll();
+        showChangedField();
     }
 
 }
