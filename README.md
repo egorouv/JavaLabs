@@ -1,5 +1,7 @@
 
-[Лаба 08.02.pdf](https://github.com/user-attachments/files/16424813/08.02.pdf)\n
+[Лаба 08.02.pdf](https://github.com/user-attachments/files/16424813/08.02.pdf)
+
+
 [Лаба 15.02.pdf](https://github.com/user-attachments/files/16424811/15.02.pdf)
 [Лаба 17.02.pdf](https://github.com/user-attachments/files/16424810/17.02.pdf)
 [Лаба 01.03.pdf](https://github.com/user-attachments/files/16424809/01.03.pdf)
