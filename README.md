@@ -1,6 +1,5 @@
 
 [Лаба 08.02.pdf](https://github.com/user-attachments/files/16424813/08.02.pdf)
-
 [Лаба 15.02.pdf](https://github.com/user-attachments/files/16424811/15.02.pdf)
 
 
